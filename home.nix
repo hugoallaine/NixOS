@@ -43,6 +43,7 @@ in
     libnotify
     networkmanagerapplet
     blueman
+    hyprshot
 
     # Keyring
     gcr
@@ -73,10 +74,15 @@ in
     enable = true;
     enableCompletion = true;
     bashrcExtra = ''
+      export XDG_PICTURES_DIR="${config.home.homeDirectory}/Pictures"
+      export XDG_VIDEOS_DIR="${config.home.homeDirectory}/Videos"
+      export XDG_MUSIC_DIR="${config.home.homeDirectory}/Musics"
+      export XDG_DOWNLOAD_DIR="${config.home.homeDirectory}/Downloads"
       eval "$(zoxide init bash)"
       eval "$(mcfly init bash)"
       export MCFLY_RESULTS=50
       export MCFLY_RESULTS_SORT=LAST_RUN
+      export HYPRSHOT_DIR="${config.home.homeDirectory}/Pictures/Screenshots"
     '';
     shellAliases = {
       cd = "z";
@@ -248,6 +254,8 @@ in
 
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
+
+        "$mainMod, PRINT, exec, hyprshot -m region"
       ];
 
       bindel = [
