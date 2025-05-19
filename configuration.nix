@@ -1,16 +1,17 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, pkgs-unstable, ... }:
+# Laptop NixOS configuration
+{
+  config,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
-  # Bootloader.
+  # Bootloader
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
@@ -29,7 +30,7 @@
   # Power Management
   services.power-profiles-daemon.enable = true;
 
-  # Set your time zone.
+  # Time zone
   time.timeZone = "Europe/Paris";
 
   # Select internationalisation properties.
@@ -56,20 +57,26 @@
   # Configure console keymap
   console.keyMap = "fr";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Users
   users.users.hallaine = {
     isNormalUser = true;
     description = "Hugo Allainé";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # Enable nix flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   # Packages
   environment.systemPackages = with pkgs; [
     cifs-utils
@@ -81,19 +88,24 @@
     noto-fonts-emoji
   ];
 
+  # NAS
   fileSystems."/mnt/NAS/hallaine" = {
     device = "//192.168.1.100/Utilisateurs/hallaine";
     fsType = "cifs";
-    options = let
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-    in ["${automount_opts},credentials=/etc/nixos/smbcredentials"];
+    options =
+      let
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in
+      [ "${automount_opts},credentials=/etc/nixos/smbcredentials" ];
   };
 
+  # Apps
   programs.hyprland.enable = true;
 
   security.pam.services.login.enableGnomeKeyring = true;
 
   programs.steam.enable = true;
 
+  # System version
   system.stateVersion = "24.11";
 }
