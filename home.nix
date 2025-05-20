@@ -22,6 +22,16 @@ in
   home.username = "hallaine";
   home.homeDirectory = "/home/hallaine";
 
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    EDITOR = "nano";
+    XDG_PICTURES_DIR = "${config.home.homeDirectory}/Pictures";
+    XDG_VIDEOS_DIR = "${config.home.homeDirectory}/Videos";
+    XDG_MUSIC_DIR = "${config.home.homeDirectory}/Musics";
+    XDG_DOWNLOAD_DIR = "${config.home.homeDirectory}/Downloads";
+    HYPRSHOT_DIR = "${config.home.homeDirectory}/Pictures/Screenshots";
+  };
+
   home.packages = with pkgs; [
     # CLI Tools
     nixfmt-rfc-style
@@ -33,6 +43,10 @@ in
     playerctl
     screen
     fastfetch
+    unzip
+
+    # Programming languages
+    python313
 
     # Hyprland
     waybar
@@ -44,6 +58,7 @@ in
     networkmanagerapplet
     blueman
     hyprshot
+    hyprlock
 
     # Keyring
     gcr
@@ -66,7 +81,7 @@ in
 
   programs.git = {
     enable = true;
-    userName = "Hugo Allainé";
+    userName = "hugoallaine";
     userEmail = "hugo+github@allaine.cc";
   };
 
@@ -74,15 +89,10 @@ in
     enable = true;
     enableCompletion = true;
     bashrcExtra = ''
-      export XDG_PICTURES_DIR="${config.home.homeDirectory}/Pictures"
-      export XDG_VIDEOS_DIR="${config.home.homeDirectory}/Videos"
-      export XDG_MUSIC_DIR="${config.home.homeDirectory}/Musics"
-      export XDG_DOWNLOAD_DIR="${config.home.homeDirectory}/Downloads"
       eval "$(zoxide init bash)"
       eval "$(mcfly init bash)"
-      export MCFLY_RESULTS=50
-      export MCFLY_RESULTS_SORT=LAST_RUN
-      export HYPRSHOT_DIR="${config.home.homeDirectory}/Pictures/Screenshots"
+      MCFLY_RESULTS = 50
+      MCFLY_RESULTS_SORT = LAST_RUN
     '';
     shellAliases = {
       cd = "z";
@@ -213,7 +223,7 @@ in
       "$mainMod" = "SUPER";
 
       bind = [
-        "$mainMod, Q, exec, $terminal"
+        "$mainMod, T, exec, $terminal"
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
@@ -221,6 +231,7 @@ in
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo,"
         "$mainMod, J, togglesplit,"
+        "$mainMod, L, exec, hyprlock"
 
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
@@ -258,6 +269,11 @@ in
         "$mainMod, PRINT, exec, hyprshot -m region"
       ];
 
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
+      ];
+
       bindel = [
         ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
@@ -279,11 +295,6 @@ in
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
     };
-  };
-
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    EDITOR = "nano";
   };
 
   programs.kitty.enable = true;
