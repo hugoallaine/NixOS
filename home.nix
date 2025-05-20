@@ -91,8 +91,8 @@ in
     bashrcExtra = ''
       eval "$(zoxide init bash)"
       eval "$(mcfly init bash)"
-      MCFLY_RESULTS = 50
-      MCFLY_RESULTS_SORT = LAST_RUN
+      export MCFLY_RESULTS=50
+      export MCFLY_RESULTS_SORT=LAST_RUN
     '';
     shellAliases = {
       cd = "z";
