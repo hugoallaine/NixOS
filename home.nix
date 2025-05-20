@@ -45,9 +45,6 @@ in
     fastfetch
     unzip
 
-    # Programming languages
-    python313
-
     # Hyprland
     waybar
     swww
