@@ -56,6 +56,8 @@ in
     blueman
     hyprshot
     hyprlock
+    kdePackages.dolphin
+    kdePackages.qtsvg
 
     # Keyring
     gcr

@@ -23,6 +23,29 @@
   networking.hostName = "laptop-nixos-allaine-cc";
   networking.networkmanager.enable = true;
 
+  networking.wireguard.enable = true;
+  networking.wg-quick.interfaces = {
+    NAS = {
+      configFile = "/home/hallaine/vpn/nas.conf";
+      # ips = [ "10.8.0.3/24" ];
+      # listenPort = 1194;
+      # privateKeyFile = "/home/hallaine/vpn/privatekey-nas.key";
+      # peers = [
+      #   {
+      #     presharedKeyFile = "/home/hallaine/vpn/presharedkey-nas.key";
+      #     publicKey = "ilm/PVGRgtJsxmd2eyfQJoA8dpPC7b5Ol+YHaE/sZD8=";
+      #     allowedIPs = [
+      #       "0.0.0.0/0"
+      #       "::/0"
+      #     ];
+      #     endpoint = "allaine.cc:1194";
+      #     persistentKeepalive = 0;
+      #   }
+      # ];
+      # mtu = 1420;
+    };
+  };
+
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
