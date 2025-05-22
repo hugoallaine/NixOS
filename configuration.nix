@@ -109,6 +109,7 @@
   fonts.packages = with pkgs; [
     font-awesome
     noto-fonts-emoji
+    nerdfonts
   ];
 
   # NAS
