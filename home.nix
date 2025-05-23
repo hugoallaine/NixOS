@@ -70,6 +70,9 @@ in
     plexamp
     vlc
 
+    # Pictures editor
+    gimp
+
     # Communications
     discord
     element-desktop
@@ -248,16 +251,16 @@ in
         "$mainMod, ccedilla, workspace, 9"
         "$mainMod, agrave, workspace, 10"
 
-        "$mainMod SHIFT, 1, movetoworkspace, 1"
-        "$mainMod SHIFT, 2, movetoworkspace, 2"
-        "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
-        "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
-        "$mainMod SHIFT, 7, movetoworkspace, 7"
-        "$mainMod SHIFT, 8, movetoworkspace, 8"
-        "$mainMod SHIFT, 9, movetoworkspace, 9"
-        "$mainMod SHIFT, 0, movetoworkspace, 10"
+        "$mainMod SHIFT, ampersand, movetoworkspace, 1"
+        "$mainMod SHIFT, eacute, movetoworkspace, 2"
+        "$mainMod SHIFT, quotedbl, movetoworkspace, 3"
+        "$mainMod SHIFT, apostrophe, movetoworkspace, 4"
+        "$mainMod SHIFT, parenleft, movetoworkspace, 5"
+        "$mainMod SHIFT, egrave, movetoworkspace, 6"
+        "$mainMod SHIFT, minus, movetoworkspace, 7"
+        "$mainMod SHIFT, underscore, movetoworkspace, 8"
+        "$mainMod SHIFT, ccedilla, movetoworkspace, 9"
+        "$mainMod SHIFT, agrave, movetoworkspace, 10"
 
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
