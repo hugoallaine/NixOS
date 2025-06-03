@@ -45,6 +45,7 @@
       # mtu = 1420;
     };
   };
+  networking.extraHosts = "192.168.1.202 prod.nasdak.fr";
 
   # Bluetooth
   hardware.bluetooth.enable = true;

@@ -6,14 +6,11 @@
   ...
 }:
 
-#${pkgs.swww}/bin/swww init &
-#${pkgs.swww}/bin/swww img /home/hallaine/wallpaper/landscape.jpg
-
+#${pkgs.linux-wallpaperengine}/bin/linux-wallpaperengine --screen-root eDP-1 1216525525 &
 let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.linux-wallpaperengine}/bin/linux-wallpaperengine --screen-root eDP-1 1216525525 &
-    ${pkgs.networkmanagerapplet}/bin/nm-applet --indicator &
-    ${pkgs.blueman}/bin/blueman-applet &
+    ${pkgs.swww}/bin/swww init &
+    ${pkgs.swww}/bin/swww img /home/hallaine/wallpaper/landscape.jpg &
     ${pkgs.waybar}/bin/waybar &
     ${pkgs.dunst}/bin/dunst
   '';
@@ -25,12 +22,16 @@ in
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     EDITOR = "nano";
+    TERM = "xterm";
     XDG_PICTURES_DIR = "${config.home.homeDirectory}/Pictures";
     XDG_VIDEOS_DIR = "${config.home.homeDirectory}/Videos";
     XDG_MUSIC_DIR = "${config.home.homeDirectory}/Musics";
     XDG_DOWNLOAD_DIR = "${config.home.homeDirectory}/Downloads";
     HYPRSHOT_DIR = "${config.home.homeDirectory}/Pictures/Screenshots";
   };
+  home.sessionPath = [
+    "$HOME/.config/waybar/scripts"
+  ];
 
   home.packages = with pkgs; [
     # CLI Tools
@@ -44,6 +45,7 @@ in
     screen
     fastfetch
     unzip
+    kubectl
 
     # Hyprland
     waybar
@@ -58,6 +60,7 @@ in
     hyprlock
     kdePackages.dolphin
     kdePackages.qtsvg
+    galculator
 
     # Keyring
     gcr
@@ -79,6 +82,9 @@ in
 
     # Games
     solitaire-tui
+
+    # Server Management
+    ipmiview
   ];
 
   programs.git = {
@@ -206,7 +212,7 @@ in
         "sensitivity" = 0;
 
         touchpad = {
-          "natural_scroll" = false;
+          "natural_scroll" = true;
         };
 
         "repeat_rate" = 40;
@@ -269,6 +275,7 @@ in
         "$mainMod, mouse_up, workspace, e-1"
 
         "$mainMod, PRINT, exec, hyprshot -m region"
+        "$mainMod, F11, fullscreen"
       ];
 
       bindm = [
@@ -296,6 +303,10 @@ in
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
+
+      xwayland = {
+        "force_zero_scaling" = true;
+      };
     };
   };
 
