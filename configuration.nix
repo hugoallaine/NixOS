@@ -16,6 +16,12 @@
     enable = true;
     efiSupport = true;
     device = "nodev";
+    minegrub-theme = {
+      enable = true;
+      splash = "100% Flakes!";
+      background = "background_options/1.8  - [Classic Minecraft].png";
+      boot-options-count = 4;
+    };
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -126,6 +132,9 @@
 
   # Apps
   programs.hyprland.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.theme = "minesddm";
 
   security.pam.services.login.enableGnomeKeyring = true;
 

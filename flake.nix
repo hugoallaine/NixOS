@@ -8,31 +8,49 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-
-  outputs = inputs@ { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: {
-    nixosConfigurations = {
-      
-      laptop-nixos-allaine-cc = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        
-        specialArgs = { 
-          pkgs-unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-        };
-        
-        modules = [
-          ./configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.hallaine = import ./home.nix;
-          }
-        ];
-      };
-    
+    minegrub-theme.url = "github:Lxtharia/minegrub-theme";
+    minesddm = {
+      url = "github:Davi-S/sddm-theme-minesddm";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      minegrub-theme,
+      minesddm,
+      ...
+    }:
+    {
+      nixosConfigurations = {
+
+        laptop-nixos-allaine-cc = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+
+          specialArgs = {
+            pkgs-unstable = import nixpkgs-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          };
+
+          modules = [
+            ./configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.hallaine = import ./home.nix;
+            }
+            minegrub-theme.nixosModules.default
+            minesddm.nixosModules.default
+          ];
+        };
+
+      };
+    };
 }
