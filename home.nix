@@ -113,7 +113,6 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
-
     settings = {
       "monitor" = "eDP-1,1920x1080@60,0x0,1.25";
 
@@ -130,7 +129,7 @@ in
 
       general = {
         "gaps_in" = 5;
-        "gaps_out" = 20;
+        "gaps_out" = 8;
         "border_size" = 2;
         "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
@@ -141,8 +140,8 @@ in
 
       decoration = {
         "rounding" = 10;
-        "active_opacity" = 1.0;
-        "inactive_opacity" = 1.0;
+        "active_opacity" = 0.9;
+        "inactive_opacity" = 0.7;
         shadow = {
           enabled = true;
           "range" = 4;
@@ -371,7 +370,7 @@ in
             Stopped = "⏹";
           };
           max-length = 40;
-          exec = "playerctl -a metadata --format '{\"text\" = \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\" = \"{{playerName}} = {{markup_escape(title)}}\", \"alt\" = \"{{status}}\", \"class\" = \"{{status}}\"}' -F";
+          exec = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} = {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
           on-click = "playerctl play-pause";
           on-click-right = "playerctl next";
           on-click-middle = "playerctl previous";
@@ -556,9 +555,8 @@ in
       }
 
       window#waybar {
-        background-color: rgba(30, 30, 46, 0.9);
+        background-color: rgba(0, 0, 0, 0);
         border-radius: 15px;
-        color: #cdd6f4;
         transition-property: background-color;
         transition-duration: 0.5s;
       }
@@ -630,6 +628,10 @@ in
         font-weight: bold;
       }
 
+      window#waybar.empty #window {  
+        background:none;  
+      }  
+
       #workspaces {
         background-color: #313244;
         margin: 4px;
@@ -669,6 +671,10 @@ in
         background-color: transparent;
         border-radius: 11px;
         transition: all 0.3s ease;
+      }
+
+      #taskbar.empty {
+        background: transparent;
       }
 
       #language {
