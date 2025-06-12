@@ -10,9 +10,10 @@
 let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     ${pkgs.waybar}/bin/waybar &
-    ${pkgs.swww}/bin/swww init &
-    ${pkgs.swww}/bin/swww img /home/hallaine/wallpaper/landscape.jpg &
-    ${pkgs.dunst}/bin/dunst
+    ${pkgs.swww}/bin/swww init
+    ${pkgs.swww}/bin/swww img /home/hallaine/wallpaper/landscape.jpg
+    ${pkgs.dunst}/bin/dunst &
+    exec systemctl --user start hyprpolkitagent
   '';
 in
 {
@@ -33,58 +34,73 @@ in
     "$HOME/.config/waybar/scripts"
   ];
 
-  home.packages = with pkgs; [
-    # CLI Tools
-    nixfmt-rfc-style
-    btop
-    zoxide
-    mcfly
-    git
-    brightnessctl
-    playerctl
-    screen
-    fastfetch
-    unzip
-    kubectl
+  home.packages =
+    with pkgs;
+    let
+      custom-rstudio = rstudioWrapper.override {
+        packages = with rPackages; [
+          foreign
+        ];
+      };
+    in
+    [
+      # CLI Tools
+      nixfmt-rfc-style
+      btop
+      zoxide
+      mcfly
+      git
+      brightnessctl
+      playerctl
+      screen
+      fastfetch
+      unzip
+      kubectl
 
-    # Hyprland
-    swww
-    linux-wallpaperengine
-    rofi-wayland
-    dunst
-    libnotify
-    networkmanagerapplet
-    blueman
-    hyprshot
-    hyprlock
-    kdePackages.dolphin
-    kdePackages.qtsvg
-    galculator
+      # Hyprland
+      swww
+      linux-wallpaperengine
+      rofi-wayland
+      dunst
+      libnotify
+      networkmanagerapplet
+      blueman
+      hyprshot
+      hyprlock
+      hyprpicker
+      hyprpolkitagent
+      pkgs-unstable.hyprsysteminfo
+      kdePackages.dolphin
+      kdePackages.qtsvg
+      galculator
 
-    # Keyring
-    gcr
-    seahorse
+      # Keyring
+      gcr
+      seahorse
 
-    # Web Browser
-    brave
+      # Web Browser
+      brave
 
-    # Media player
-    plexamp
-    vlc
+      # Media player
+      plexamp
+      vlc
 
-    # Pictures editor
-    gimp
+      # Pictures editor
+      gimp
 
-    # Communications
-    discord
-    element-desktop
+      # Communications
+      discord
+      element-desktop
 
-    # Games
-    solitaire-tui
+      # Games
+      solitaire-tui
 
-    # Server Management
-    ipmiview
-  ];
+      # Server Management
+      ipmiview
+
+      # R
+      custom-rstudio
+    ];
 
   programs.git = {
     enable = true;

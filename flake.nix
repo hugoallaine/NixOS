@@ -45,6 +45,12 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.hallaine = import ./home.nix;
+              home-manager.extraSpecialArgs = {
+                pkgs-unstable = import nixpkgs-unstable {
+                  inherit system;
+                  config.allowUnfree = true;
+                };
+              };
             }
             minegrub-theme.nixosModules.default
             minesddm.nixosModules.default
