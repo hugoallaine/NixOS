@@ -884,8 +884,9 @@ in
     force = true;
     text = ''
       {
-          "password-store": "gnome",
-          "locale": "fr"
+        "enable-crash-reporter": true,
+        "password-store": "gnome",
+        "locale": "fr"
       }
     '';
   };

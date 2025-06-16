@@ -9,6 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
+    minegrub-world-sel-theme.url = "github:Lxtharia/minegrub-world-sel-theme";
     minesddm = {
       url = "github:Davi-S/sddm-theme-minesddm";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +23,7 @@
       nixpkgs-unstable,
       home-manager,
       minegrub-theme,
+      minegrub-world-sel-theme,
       minesddm,
       ...
     }:
@@ -53,6 +55,7 @@
               };
             }
             minegrub-theme.nixosModules.default
+            minegrub-world-sel-theme.nixosModules.default
             minesddm.nixosModules.default
           ];
         };

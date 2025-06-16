@@ -17,10 +17,21 @@
     efiSupport = true;
     device = "nodev";
     minegrub-theme = {
-      enable = true;
+      enable = false;
       splash = "100% Flakes!";
       background = "background_options/1.8  - [Classic Minecraft].png";
       boot-options-count = 4;
+    };
+    minegrub-world-sel = {
+      enable = true;
+      customIcons = [
+        {
+          name = "nixos";
+          lineTop = "allaine.cc";
+          lineBottom = "Version: 25.05";
+          imgName = "nixos";
+        }
+      ];
     };
   };
   boot.loader.efi.canTouchEfiVariables = true;
