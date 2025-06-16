@@ -93,8 +93,7 @@
   # Fonts
   fonts.packages = with pkgs; [
     font-awesome
-    noto-fonts-emoji
-    nerdfonts
+    nerd-fonts.jetbrains-mono
   ];
 
   # NAS

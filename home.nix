@@ -864,6 +864,10 @@ in
     };
   };
 
+  qt = {
+    enable = true;
+  };
+
   programs.kitty.enable = true;
 
   services.gnome-keyring = {
@@ -880,7 +884,6 @@ in
     force = true;
     text = ''
       {
-          "enable-crash-reporter": true,
           "password-store": "gnome",
           "locale": "fr"
       }
