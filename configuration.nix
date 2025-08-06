@@ -16,6 +16,11 @@
     enable = true;
     efiSupport = true;
     device = "nodev";
+    extraEntries = ''
+      menuentry "UEFI Firmware Settings" {
+          fwsetup
+      }
+    '';
     minegrub-theme = {
       enable = false;
       splash = "100% Flakes!";

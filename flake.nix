@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # lanzaboote = {
+    #   url = "github:nix-community/lanzaboote/v0.4.2";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +25,7 @@
       self,
       nixpkgs,
       nixpkgs-unstable,
+      # lanzaboote,
       home-manager,
       minegrub-theme,
       minegrub-world-sel-theme,
@@ -42,6 +47,18 @@
 
           modules = [
             ./configuration.nix
+            # lanzaboote.nixosModules.lanzaboote
+            # ({ pkgs, lib, ... }: {
+
+            #   environment.systemPackages = [
+            #     pkgs.sbctl
+            #   ];
+            #   boot.loader.systemd-boot.enable = lib.mkForce false;
+            #   boot.lanzaboote = {
+            #     enable = true;
+            #     pkiBundle = "/var/lib/sbctl";
+            #   };
+            # })
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
