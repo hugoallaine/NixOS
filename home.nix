@@ -65,6 +65,7 @@ in
       libnotify
       networkmanagerapplet
       blueman
+      pavucontrol
       hyprshot
       hyprpicker
       hyprpolkitagent
