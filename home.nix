@@ -81,9 +81,13 @@ in
       # Web Browser
       brave
 
+      # Editing
+      libreoffice-qt6
+
       # Media player
       plexamp
       vlc
+      spotify
 
       # Pictures editor
       gimp
