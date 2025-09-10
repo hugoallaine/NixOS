@@ -82,7 +82,7 @@ in
       brave
 
       # Editing
-      libreoffice-qt6
+      onlyoffice-desktopeditors
 
       # Media player
       plexamp
@@ -222,7 +222,7 @@ in
 
       input = {
         "kb_layout" = "fr,us";
-        "kb_variant" = "nodeadkeys,";
+        "kb_variant" = ",";
         "kb_options" = "grp:alt_shift_toggle";
 
         "follow_mouse" = 1;

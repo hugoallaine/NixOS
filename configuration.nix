@@ -16,6 +16,7 @@
     enable = true;
     efiSupport = true;
     device = "nodev";
+    useOSProber = true;
     extraEntries = ''
       menuentry "UEFI Firmware Settings" {
           fwsetup
