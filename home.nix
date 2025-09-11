@@ -37,11 +37,7 @@ in
   home.packages =
     with pkgs;
     let
-      custom-rstudio = rstudioWrapper.override {
-        packages = with rPackages; [
-          foreign
-        ];
-      };
+
     in
     [
       # CLI Tools
@@ -101,9 +97,6 @@ in
 
       # Server Management
       ipmiview
-
-      # R
-      custom-rstudio
     ];
 
   programs.git = {
