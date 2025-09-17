@@ -89,6 +89,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     packages = with pkgs; [ ];
   };
@@ -133,6 +134,7 @@
   security.pam.services.login.enableGnomeKeyring = true;
 
   programs.steam.enable = true;
+  virtualisation.docker.enable = true;
 
   # System version
   system.stateVersion = "24.11";

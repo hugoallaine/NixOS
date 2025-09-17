@@ -94,6 +94,7 @@ in
 
       # Games
       solitaire-tui
+      melonDS
 
       # Server Management
       ipmiview
