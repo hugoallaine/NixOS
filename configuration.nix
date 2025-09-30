@@ -45,7 +45,7 @@
   # Networking
   networking.hostName = "laptop-nixos-allaine-cc";
   networking.networkmanager.enable = true;
-  #networking.wg-quick.interfaces.NAS.configFile = "/home/hallaine/vpn/nas.conf";
+  networking.wg-quick.interfaces.NAS.configFile = "/home/hallaine/vpn/nas.conf";
   networking.extraHosts = "192.168.1.202 prod.nasdak.fr";
 
   # Bluetooth

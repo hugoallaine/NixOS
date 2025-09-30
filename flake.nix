@@ -18,6 +18,7 @@
       url = "github:Davi-S/sddm-theme-minesddm";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    walker.url = "github:abenz1267/walker";
   };
 
   outputs =
@@ -30,6 +31,7 @@
       minegrub-theme,
       minegrub-world-sel-theme,
       minesddm,
+      walker,
       ...
     }:
     {
@@ -69,6 +71,7 @@
                   inherit system;
                   config.allowUnfree = true;
                 };
+                walker = walker;
               };
             }
             minegrub-theme.nixosModules.default
