@@ -131,6 +131,7 @@
 
   # Apps
   programs.hyprland.enable = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.displayManager.sddm.theme = "minesddm";

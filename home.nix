@@ -24,7 +24,6 @@ in
   home.homeDirectory = "/home/hallaine";
 
   home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
     EDITOR = "nano";
     TERM = "xterm";
     XDG_PICTURES_DIR = "${config.home.homeDirectory}/Pictures";
