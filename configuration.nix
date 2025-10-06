@@ -50,10 +50,14 @@
 
   # Bluetooth
   hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.powerOnBoot = false;
 
   # Power Management
-  services.power-profiles-daemon.enable = true;
+  services.tlp.enable = true;
+  powerManagement.powertop.enable = true;
+  services.logind.lidSwitch = "lock";
+  services.logind.lidSwitchExternalPower = "lock";
+  services.logind.lidSwitchDocked = "lock";
 
   # Time zone
   time.timeZone = "Europe/Paris";
