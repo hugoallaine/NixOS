@@ -101,6 +101,9 @@ in
 
       # Server Management
       ipmiview
+
+      # UTBM
+      ciscoPacketTracer8
     ];
 
   programs.git = {
