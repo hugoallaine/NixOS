@@ -54,6 +54,7 @@ in
       fastfetch
       unzip
       kubectl
+      helm
 
       # Hyprland
       swww

@@ -55,9 +55,9 @@
   # Power Management
   services.tlp.enable = true;
   powerManagement.powertop.enable = true;
-  services.logind.lidSwitch = "lock";
-  services.logind.lidSwitchExternalPower = "lock";
-  services.logind.lidSwitchDocked = "lock";
+  services.logind.lidSwitch = "suspend";
+  services.logind.lidSwitchExternalPower = "suspend";
+  services.logind.lidSwitchDocked = "suspend";
 
   # Time zone
   time.timeZone = "Europe/Paris";
