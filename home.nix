@@ -55,6 +55,7 @@ in
       unzip
       kubectl
       kubernetes-helm
+      pkgs-unstable.msedit
 
       # Hyprland
       swww
