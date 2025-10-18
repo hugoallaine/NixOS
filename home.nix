@@ -845,7 +845,7 @@ in
   };
 
   programs.walker = {
-    enable = true;
+    enable = false;
     runAsService = true;
     config = {
       placeholders."default".input = "Example";
