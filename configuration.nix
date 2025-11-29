@@ -150,6 +150,7 @@
 
   programs.steam.enable = true;
   virtualisation.docker.enable = true;
+  programs.nix-ld.enable = true;
 
   # System version
   system.stateVersion = "24.11";

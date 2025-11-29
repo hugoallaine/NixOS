@@ -34,6 +34,7 @@ in
   };
   home.sessionPath = [
     "$HOME/.config/waybar/scripts"
+    "$HOME/.local/bin"
   ];
 
   home.packages = with pkgs;
@@ -55,10 +56,7 @@ in
     kubectl
     kubernetes-helm
     pkgs-unstable.msedit
-    ansible
-    python3Packages.proxmoxer
-    python3Packages.requests
-    python3Packages.requests-toolbelt
+    uv
 
     # Hyprland
     swww
