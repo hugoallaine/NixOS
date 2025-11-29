@@ -56,6 +56,10 @@ in
       kubectl
       kubernetes-helm
       pkgs-unstable.msedit
+      ansible
+      python3Packages.proxmoxer
+      python3Packages.requests
+      python3Packages.requests-toolbelt
 
       # Hyprland
       swww
