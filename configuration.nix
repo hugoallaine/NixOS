@@ -136,6 +136,7 @@
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.package = pkgs.kdePackages.sddm;
   services.displayManager.sddm.theme = "minesddm";
 
   services.gnome.gnome-keyring.enable = true;

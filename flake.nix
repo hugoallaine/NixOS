@@ -16,7 +16,7 @@
     minegrub-world-sel-theme.url = "github:Lxtharia/minegrub-world-sel-theme";
     minesddm = {
       url = "github:Davi-S/sddm-theme-minesddm";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     walker.url = "github:abenz1267/walker";
   };
