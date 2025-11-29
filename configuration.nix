@@ -102,6 +102,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Enable nix flakes
+  nix.settings.download-buffer-size = 1024 * 1024 * 1024; # 1 GiB
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
