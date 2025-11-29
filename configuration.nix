@@ -133,11 +133,16 @@
   # Apps
   programs.hyprland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.displayManager.sddm.theme = "minesddm";
 
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.hyprland.enableGnomeKeyring = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
   security.pam.services.login.enableGnomeKeyring = true;
+  security.polkit.enable = true;
 
   programs.steam.enable = true;
   virtualisation.docker.enable = true;

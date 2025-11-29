@@ -74,8 +74,6 @@ in
       hyprpicker
       hyprpolkitagent
       pkgs-unstable.hyprsysteminfo
-      kdePackages.dolphin
-      kdePackages.qtsvg
       galculator
 
       # Keyring
@@ -899,15 +897,6 @@ in
   };
 
   programs.kitty.enable = true;
-
-  services.gnome-keyring = {
-    enable = true;
-    components = [
-      "pkcs11"
-      "secrets"
-      "ssh"
-    ];
-  };
 
   programs.vscode.enable = true;
   home.file.".vscode/argv.json" = {
