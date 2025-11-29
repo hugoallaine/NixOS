@@ -36,78 +36,77 @@ in
     "$HOME/.config/waybar/scripts"
   ];
 
-  home.packages =
-    with pkgs;
-    let
+  home.packages = with pkgs;
+  let
 
-    in
-    [
-      # CLI Tools
-      nixfmt-rfc-style
-      btop
-      zoxide
-      mcfly
-      git
-      brightnessctl
-      playerctl
-      screen
-      fastfetch
-      unzip
-      kubectl
-      kubernetes-helm
-      pkgs-unstable.msedit
-      ansible
-      python3Packages.proxmoxer
-      python3Packages.requests
-      python3Packages.requests-toolbelt
+  in
+  [
+    # CLI Tools
+    nixfmt-rfc-style
+    btop
+    zoxide
+    mcfly
+    git
+    brightnessctl
+    playerctl
+    screen
+    fastfetch
+    unzip
+    kubectl
+    kubernetes-helm
+    pkgs-unstable.msedit
+    ansible
+    python3Packages.proxmoxer
+    python3Packages.requests
+    python3Packages.requests-toolbelt
 
-      # Hyprland
-      swww
-      linux-wallpaperengine
-      rofi-wayland
-      dunst
-      libnotify
-      networkmanagerapplet
-      blueman
-      pavucontrol
-      hyprshot
-      hyprpicker
-      hyprpolkitagent
-      pkgs-unstable.hyprsysteminfo
-      galculator
+    # Hyprland
+    swww
+    linux-wallpaperengine
+    rofi-wayland
+    dunst
+    libnotify
+    networkmanagerapplet
+    blueman
+    pavucontrol
+    hyprshot
+    hyprpicker
+    hyprpolkitagent
+    pkgs-unstable.hyprsysteminfo
+    galculator
 
-      # Keyring
-      gcr
-      seahorse
+    # Keyring
+    gcr
+    seahorse
 
-      # Web Browser
-      brave
+    # Web Browser
+    brave
 
-      # Editing
-      onlyoffice-desktopeditors
+    # Editing
+    onlyoffice-desktopeditors
 
-      # Media player
-      plexamp
-      vlc
-      spotify
+    # Media player
+    plexamp
+    vlc
+    spotify
 
-      # Pictures editor
-      gimp
+    # Pictures editor
+    gimp
 
-      # Communications
-      discord
-      element-desktop
+    # Communications
+    discord
+    element-desktop # Bug in 25.05, need to launch once manually with --password-store=gnome-libsecret to use keyring
 
-      # Games
-      solitaire-tui
-      melonDS
+    # Games
+    solitaire-tui
+    melonDS
 
-      # Server Management
-      ipmiview
+    # Server Management
+    ipmiview
 
-      # UTBM
-      ciscoPacketTracer8
-    ];
+    # UTBM
+    ciscoPacketTracer8
+  ];
 
   programs.git = {
     enable = true;
