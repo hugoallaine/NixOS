@@ -70,7 +70,7 @@ in
     hyprshot
     hyprpicker
     hyprpolkitagent
-    hyprpwcenter
+    #hyprpwcenter
     #pkgs-unstable.hyprshutdown
     pkgs-unstable.hyprsysteminfo
     galculator
