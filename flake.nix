@@ -2,20 +2,20 @@
   description = "Hugo Allainé | Laptop NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # lanzaboote = {
     #   url = "github:nix-community/lanzaboote/v0.4.2";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
     minegrub-world-sel-theme.url = "github:Lxtharia/minegrub-world-sel-theme";
     minesddm = {
-      url = "github:Davi-S/sddm-theme-minesddm";
+      url = "github:Davi-S/sddm-theme-minesddm/ee7b44ab7e27b0f4fafc59d7cc8f1cf35ecfa776";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     walker.url = "github:abenz1267/walker";

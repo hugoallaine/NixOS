@@ -55,9 +55,9 @@
   # Power Management
   services.tlp.enable = true;
   powerManagement.powertop.enable = true;
-  services.logind.lidSwitch = "suspend";
-  services.logind.lidSwitchExternalPower = "suspend";
-  services.logind.lidSwitchDocked = "suspend";
+  services.logind.settings.Login.HandleLidSwitch = "suspend";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "suspend";
+  services.logind.settings.Login.HandleLidSwitchDocked = "suspend";
 
   # Time zone
   time.timeZone = "Europe/Paris";

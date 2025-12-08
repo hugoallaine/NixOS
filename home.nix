@@ -61,7 +61,7 @@ in
     # Hyprland
     swww
     linux-wallpaperengine
-    rofi-wayland
+    rofi
     dunst
     libnotify
     networkmanagerapplet
@@ -70,6 +70,8 @@ in
     hyprshot
     hyprpicker
     hyprpolkitagent
+    hyprpwcenter
+    #pkgs-unstable.hyprshutdown
     pkgs-unstable.hyprsysteminfo
     galculator
 
@@ -103,13 +105,16 @@ in
     ipmiview
 
     # UTBM
-    ciscoPacketTracer8
+    #ciscoPacketTracer8
   ];
 
   programs.git = {
     enable = true;
-    userName = "hugoallaine";
-    userEmail = "hugo+github@allaine.cc";
+    lfs.enable = true;
+    settings = {
+      user.name = "hugoallaine";
+      user.email = "hugo+github@allaine.cc";
+    };
   };
 
   programs.bash = {
