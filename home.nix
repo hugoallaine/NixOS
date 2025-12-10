@@ -11,7 +11,7 @@
 let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     ${pkgs.waybar}/bin/waybar &
-    ${pkgs.swww}/bin/swww init
+    ${pkgs.swww}/bin/swww-daemon &
     ${pkgs.swww}/bin/swww img /home/hallaine/wallpaper/landscape.jpg
     ${pkgs.dunst}/bin/dunst &
     exec systemctl --user start hyprpolkitagent
@@ -100,6 +100,7 @@ in
     # Games
     solitaire-tui
     melonDS
+    prismlauncher
 
     # Server Management
     ipmiview
