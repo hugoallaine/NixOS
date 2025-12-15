@@ -74,7 +74,6 @@ in
     #pkgs-unstable.hyprshutdown
     pkgs-unstable.hyprsysteminfo
     galculator
-    spacedrive
 
     # Keyring
     gcr
