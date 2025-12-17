@@ -12,13 +12,16 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
     minegrub-world-sel-theme.url = "github:Lxtharia/minegrub-world-sel-theme";
     minesddm = {
       url = "github:Davi-S/sddm-theme-minesddm/ee7b44ab7e27b0f4fafc59d7cc8f1cf35ecfa776";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    walker.url = "github:abenz1267/walker";
   };
 
   outputs =
@@ -28,10 +31,10 @@
       nixpkgs-unstable,
       # lanzaboote,
       home-manager,
+      dms,
       minegrub-theme,
       minegrub-world-sel-theme,
       minesddm,
-      walker,
       ...
     }:
     {
@@ -65,13 +68,17 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.hallaine = import ./home.nix;
+              home-manager.users.hallaine = { ... }: {
+                imports = [
+                  ./home.nix
+                  dms.homeModules.dankMaterialShell.default
+                ];
+              };
               home-manager.extraSpecialArgs = {
                 pkgs-unstable = import nixpkgs-unstable {
                   inherit system;
                   config.allowUnfree = true;
                 };
-                walker = walker;
               };
             }
             minegrub-theme.nixosModules.default
@@ -79,7 +86,6 @@
             minesddm.nixosModules.default
           ];
         };
-
       };
     };
 }

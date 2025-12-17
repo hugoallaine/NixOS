@@ -3,7 +3,6 @@
   config,
   pkgs,
   pkgs-unstable,
-  walker,
   ...
 }:
 
@@ -18,8 +17,6 @@ let
   '';
 in
 {
-  imports = [walker.homeManagerModules.default];
-
   home.username = "hallaine";
   home.homeDirectory = "/home/hallaine";
 
@@ -135,6 +132,22 @@ in
       nob = "sudo nixos-rebuild boot --flake ~/repo/nixos/#laptop-nixos-allaine-cc";
       nixconf = "sudo nano /etc/nixos/configuration.nix";
     };
+  };
+  
+  programs.dankMaterialShell = {
+    enable = true;
+
+    systemd = {
+        enable = true;
+        restartIfChanged = true;
+    };
+    
+    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
+    enableClipboard = true;            # Clipboard history manager
+    enableVPN = true;                  # VPN management widget
+    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
+    enableAudioWavelength = true;      # Audio visualizer (cava)
+    enableCalendarEvents = true;       # Calendar integration (khal)
   };
 
   wayland.windowManager.hyprland = {
@@ -328,7 +341,7 @@ in
   };
 
   programs.waybar = {
-    enable = true;
+    enable = false;
     settings = {
       mainBar = {
         layer = "top";
@@ -788,7 +801,7 @@ in
   };
 
   programs.hyprlock = {
-    enable = true;
+    enable = false;
     settings = {
       general = {
         no_fade_in = false;
@@ -844,27 +857,6 @@ in
           valign = "center";
         }
       ];
-    };
-  };
-
-  programs.walker = {
-    enable = false;
-    runAsService = true;
-    config = {
-      placeholders."default".input = "Example";
-      providers.prefixes = [
-        {provider = "websearch"; prefix = "+";}
-        {provider = "providerlist"; prefix = "_";}
-      ];
-      keybinds.quick_activate = ["F1" "F2" "F3"];
-      theme = "nixos";
-    };
-    themes.nixos = {
-      style = ''
-        * {
-            color: #dcd7ba;
-        }
-      '';
     };
   };
 
