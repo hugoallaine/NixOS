@@ -12,6 +12,7 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -31,6 +32,7 @@
       nixpkgs-unstable,
       # lanzaboote,
       home-manager,
+      hyprland,
       dms,
       minegrub-theme,
       minegrub-world-sel-theme,
@@ -44,6 +46,7 @@
           system = "x86_64-linux";
 
           specialArgs = {
+            inherit hyprland;
             pkgs-unstable = import nixpkgs-unstable {
               inherit system;
               config.allowUnfree = true;

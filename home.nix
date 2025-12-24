@@ -3,6 +3,7 @@
   config,
   pkgs,
   pkgs-unstable,
+  hyprland,
   ...
 }:
 
@@ -21,6 +22,7 @@ in
   home.homeDirectory = "/home/hallaine";
 
   home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
     EDITOR = "nano";
     TERM = "xterm";
     XDG_PICTURES_DIR = "${config.home.homeDirectory}/Pictures";
@@ -45,7 +47,6 @@ in
     zoxide
     mcfly
     git
-    brightnessctl
     playerctl
     screen
     fastfetch
@@ -56,20 +57,12 @@ in
     uv
 
     # Hyprland
-    swww
     linux-wallpaperengine
-    rofi
-    dunst
-    libnotify
-    networkmanagerapplet
-    blueman
-    pavucontrol
-    hyprshot
-    hyprpicker
-    hyprpolkitagent
+    # hyprshot
+    # hyprpicker
+    # hyprpolkitagent
     #hyprpwcenter
     #pkgs-unstable.hyprshutdown
-    pkgs-unstable.hyprsysteminfo
     galculator
 
     # Keyring
@@ -152,14 +145,17 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
+    package = null;
+    portalPackage = null;
+    systemd.enable = false;
     settings = {
       "monitor" = "eDP-1,1920x1080@60,0x0,1.25";
 
       "$terminal" = "kitty";
-      "$fileManager" = "dolphin";
-      "$menu" = "rofi -show drun -show-icons";
+      "$fileManager" = "";
+      "$menu" = "dms ipc call spotlight toggle";
 
-      exec-once = ''${startupScript}/bin/start'';
+      #exec-once = ''${startupScript}/bin/start'';
 
       env = [
         "XCURSOR_SIZE,24"
@@ -311,6 +307,7 @@ in
 
         "$mainMod, PRINT, exec, hyprshot -m region"
         "$mainMod, F11, fullscreen"
+        "ALT, Tab, exec, dms ipc call hypr toggleOverview"
       ];
 
       bindm = [

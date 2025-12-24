@@ -3,6 +3,7 @@
   config,
   pkgs,
   pkgs-unstable,
+  hyprland,
   ...
 }:
 
@@ -101,12 +102,18 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable nix flakes
+  # Nix settings
   nix.settings.download-buffer-size = 1024 * 1024 * 1024; # 1 GiB
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+  # Cachix
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
 
   # Packages
   environment.systemPackages = with pkgs; [
@@ -130,10 +137,15 @@
       [ "${automount_opts},credentials=/etc/nixos/smbcredentials" ];
   };
 
-  # Apps
-  programs.hyprland.enable = true;
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  # Window manager
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
 
+  # Display manager
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -141,6 +153,7 @@
     theme = "minesddm";
   };
 
+  # Keyring and polkit
   services.gnome.gnome-keyring.enable = true;
   security.pam.services = {
     sddm.enableGnomeKeyring = true;
@@ -148,6 +161,7 @@
   };
   security.polkit.enable = true;
 
+  # Other
   programs.steam.enable = true;
   virtualisation.docker.enable = true;
   programs.nix-ld.enable = true;
