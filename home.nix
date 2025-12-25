@@ -30,7 +30,6 @@
     XDG_VIDEOS_DIR = "${config.home.homeDirectory}/Videos";
     XDG_MUSIC_DIR = "${config.home.homeDirectory}/Musics";
     XDG_DOWNLOAD_DIR = "${config.home.homeDirectory}/Downloads";
-    HYPRSHOT_DIR = "${config.home.homeDirectory}/Pictures/Screenshots";
   };
   home.sessionPath = [
     "$HOME/.config/waybar/scripts"
@@ -121,48 +120,26 @@
       nixconf = "sudo nano /etc/nixos/configuration.nix";
     };
   };
-  
-  programs.dankMaterialShell = {
-    enable = true;
-    systemd = {
-      enable = true;
-      restartIfChanged = true;
+
+  # UWSM
+  xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
+
+  systemd.user.services.cliphist = {
+    Unit = {
+      Description = "Cliphist clipboard manager";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
     };
-    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
-    enableClipboard = true;            # Clipboard history manager
-    enableVPN = true;                  # VPN management widget
-    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
-    enableAudioWavelength = true;      # Audio visualizer (cava)
-    enableCalendarEvents = true;       # Calendar integration (khal)
+    Service = {
+      ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
   };
 
-  programs.nix-monitor = {
-    enable = true;
-    updateInterval = 3600;
-    rebuildCommand = [ 
-      "bash" "-c" 
-      "cd ~/repo/nixos && nix flake update && sudo -n ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake ~/repo/nixos/#laptop-nixos-allaine-cc 2>&1"
-    ];
-    generationsCommand = [
-      "bash" "-c" 
-      "sudo -n ${pkgs.nix}/bin/nix-env --list-generations --profile /nix/var/nix/profiles/system | wc -l"
-    ];
-    storeSizeCommand = [
-      "bash" "-c" 
-      "sudo -n ${pkgs.coreutils}/bin/du -sh /nix/store | cut -f1"
-    ];
-    gcCommand = [ 
-      "bash" "-c" 
-      "sudo -n ${pkgs.nix}/bin/nix-collect-garbage -d 2>&1" 
-    ];
-    remoteRevisionCommand = [
-      "bash" "-l" "-c"
-      "curl -s https://api.github.com/repos/NixOS/nixpkgs/git/ref/heads/nixos-25.11 2>/dev/null | ${pkgs.jq}/bin/jq -r '.object.sha' 2>/dev/null | cut -c 1-7 || echo 'N/A'"
-    ];
-    nixpkgsChannel = "nixos-25.11";
-  };
-
-  xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh"; 
+  # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
@@ -170,11 +147,6 @@
     systemd.enable = false;
     settings = {
       "monitor" = "eDP-1,1920x1080@60,0x0,1.25";
-
-      exec-once = [
-        "${pkgs.bash}/bin/bash" "-c" "wl-paste --watch cliphist store &"
-        "systemctl --user start hyprpolkitagent"
-      ];
 
       general = {
         "gaps_in" = 5;
@@ -321,7 +293,7 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        "$mainMod, PRINT, exec, dms screenshot"
+        "$mainMod, PRINT, exec, dms screenshot -d ${config.home.homeDirectory}/Pictures/Screenshots"
         "$mainMod, F11, fullscreen"
         "$mainMod, Tab, exec, dms ipc call hypr toggleOverview"
       ];
@@ -364,6 +336,48 @@
     };
   };
 
+  # Dank Material Shell
+  programs.dankMaterialShell = {
+    enable = true;
+    systemd = {
+      enable = true;
+      restartIfChanged = true;
+    };
+    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
+    enableClipboard = true;            # Clipboard history manager
+    enableVPN = true;                  # VPN management widget
+    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
+    enableAudioWavelength = true;      # Audio visualizer (cava)
+    enableCalendarEvents = true;       # Calendar integration (khal)
+  };
+
+  programs.nix-monitor = {
+    enable = true;
+    updateInterval = 3600;
+    rebuildCommand = [ 
+      "bash" "-c" 
+      "cd ~/repo/nixos && nix flake update && sudo -n ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake ~/repo/nixos/#laptop-nixos-allaine-cc 2>&1"
+    ];
+    generationsCommand = [
+      "bash" "-c" 
+      "sudo -n ${pkgs.nix}/bin/nix-env --list-generations --profile /nix/var/nix/profiles/system | wc -l"
+    ];
+    storeSizeCommand = [
+      "bash" "-c" 
+      "sudo -n ${pkgs.coreutils}/bin/du -sh /nix/store | cut -f1"
+    ];
+    gcCommand = [ 
+      "bash" "-c" 
+      "sudo -n ${pkgs.nix}/bin/nix-collect-garbage -d 2>&1" 
+    ];
+    remoteRevisionCommand = [
+      "bash" "-l" "-c"
+      "curl -s https://api.github.com/repos/NixOS/nixpkgs/git/ref/heads/nixos-25.11 2>/dev/null | ${pkgs.jq}/bin/jq -r '.object.sha' 2>/dev/null | cut -c 1-7 || echo 'N/A'"
+    ];
+    nixpkgsChannel = "nixos-25.11";
+  };
+
+  # Waybar
   programs.waybar = {
     enable = false;
     settings = {
@@ -824,6 +838,7 @@
     '';
   };
 
+  # Hyprlock
   programs.hyprlock = {
     enable = false;
     settings = {
@@ -884,6 +899,7 @@
     };
   };
 
+  # Themes
   gtk = {
     enable = true;
     font.name = "Montserrat 10";
