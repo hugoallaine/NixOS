@@ -35,7 +35,7 @@
         {
           name = "nixos";
           lineTop = "allaine.cc";
-          lineBottom = "Version: 25.05";
+          lineBottom = "Version: 25.11";
           imgName = "nixos";
         }
       ];
@@ -54,7 +54,8 @@
   hardware.bluetooth.powerOnBoot = false;
 
   # Power Management
-  services.tlp.enable = true;
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
   powerManagement.powertop.enable = true;
   services.logind.settings.Login.HandleLidSwitch = "suspend";
   services.logind.settings.Login.HandleLidSwitchExternalPower = "suspend";
@@ -103,13 +104,13 @@
   nixpkgs.config.allowUnfree = true;
 
   # Nix settings
-  nix.settings.download-buffer-size = 1024 * 1024 * 1024; # 1 GiB
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  # Cachix
   nix.settings = {
+    download-buffer-size = 1024 * 1024 * 1024; # 1 GiB
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    # Cachix
     substituters = ["https://hyprland.cachix.org"];
     trusted-substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
@@ -160,6 +161,20 @@
     login.enableGnomeKeyring = true;
   };
   security.polkit.enable = true;
+  security.sudo = {
+    enable = true;
+    extraRules = [
+      {
+        users = [ "hallaine" ];
+        commands = [
+          { command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild"; options = [ "NOPASSWD" ]; }
+          { command = "${pkgs.nix}/bin/nix-collect-garbage"; options = [ "NOPASSWD" ]; }
+          { command = "${pkgs.nix}/bin/nix-env"; options = [ "NOPASSWD" ]; }
+          { command = "${pkgs.coreutils}/bin/du"; options = [ "NOPASSWD" ]; }
+        ];
+      }
+    ];
+  };
 
   # Other
   programs.steam.enable = true;

@@ -3,25 +3,26 @@
   config,
   pkgs,
   pkgs-unstable,
-  hyprland,
   ...
 }:
 
 #${pkgs.linux-wallpaperengine}/bin/linux-wallpaperengine --screen-root eDP-1 1216525525 &
-let
-  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.waybar}/bin/waybar &
-    ${pkgs.swww}/bin/swww-daemon &
-    ${pkgs.swww}/bin/swww img /home/hallaine/wallpaper/landscape.jpg
-    ${pkgs.dunst}/bin/dunst &
-    exec systemctl --user start hyprpolkitagent
-  '';
-in
 {
   home.username = "hallaine";
   home.homeDirectory = "/home/hallaine";
 
   home.sessionVariables = {
+    XCURSOR_SIZE = 24;
+    HYPRCURSOR_SIZE = 24;
+    GDK_BACKEND = "wayland";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    CLUTTER_BACKEND = "wayland";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    QT_AUTO_SCREEN_SCALE_FACTOR = 1;
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
+    QT_QPA_PLATFORMTHEME = "gtk3";
+    QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
     NIXOS_OZONE_WL = "1";
     EDITOR = "nano";
     TERM = "xterm";
@@ -37,9 +38,6 @@ in
   ];
 
   home.packages = with pkgs;
-  let
-
-  in
   [
     # CLI Tools
     nixfmt-rfc-style
@@ -56,13 +54,10 @@ in
     pkgs-unstable.msedit
     uv
 
-    # Hyprland
+    # Desktop
+    hyprpolkitagent
+    xfce.thunar
     linux-wallpaperengine
-    # hyprshot
-    # hyprpicker
-    # hyprpolkitagent
-    #hyprpwcenter
-    #pkgs-unstable.hyprshutdown
     galculator
 
     # Keyring
@@ -129,12 +124,10 @@ in
   
   programs.dankMaterialShell = {
     enable = true;
-
     systemd = {
-        enable = true;
-        restartIfChanged = true;
+      enable = true;
+      restartIfChanged = true;
     };
-    
     enableSystemMonitoring = true;     # System monitoring widgets (dgop)
     enableClipboard = true;            # Clipboard history manager
     enableVPN = true;                  # VPN management widget
@@ -143,6 +136,33 @@ in
     enableCalendarEvents = true;       # Calendar integration (khal)
   };
 
+  programs.nix-monitor = {
+    enable = true;
+    updateInterval = 3600;
+    rebuildCommand = [ 
+      "bash" "-c" 
+      "cd ~/repo/nixos && nix flake update && sudo -n ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake ~/repo/nixos/#laptop-nixos-allaine-cc 2>&1"
+    ];
+    generationsCommand = [
+      "bash" "-c" 
+      "sudo -n ${pkgs.nix}/bin/nix-env --list-generations --profile /nix/var/nix/profiles/system | wc -l"
+    ];
+    storeSizeCommand = [
+      "bash" "-c" 
+      "sudo -n ${pkgs.coreutils}/bin/du -sh /nix/store | cut -f1"
+    ];
+    gcCommand = [ 
+      "bash" "-c" 
+      "sudo -n ${pkgs.nix}/bin/nix-collect-garbage -d 2>&1" 
+    ];
+    remoteRevisionCommand = [
+      "bash" "-l" "-c"
+      "curl -s https://api.github.com/repos/NixOS/nixpkgs/git/ref/heads/nixos-25.11 2>/dev/null | ${pkgs.jq}/bin/jq -r '.object.sha' 2>/dev/null | cut -c 1-7 || echo 'N/A'"
+    ];
+    nixpkgsChannel = "nixos-25.11";
+  };
+
+  xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh"; 
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
@@ -151,37 +171,30 @@ in
     settings = {
       "monitor" = "eDP-1,1920x1080@60,0x0,1.25";
 
-      "$terminal" = "kitty";
-      "$fileManager" = "";
-      "$menu" = "dms ipc call spotlight toggle";
-
-      #exec-once = ''${startupScript}/bin/start'';
-
-      env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
+      exec-once = [
+        "${pkgs.bash}/bin/bash" "-c" "wl-paste --watch cliphist store &"
+        "systemctl --user start hyprpolkitagent"
       ];
 
       general = {
         "gaps_in" = 5;
-        "gaps_out" = 8;
-        "border_size" = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
-        "resize_on_border" = false;
-        "allow_tearing" = false;
+        "gaps_out" = 5;
+        "border_size" = 0;
+        "col.active_border" = "rgba(707070ff)";
+        "col.inactive_border" = "rgba(d0d0d0ff)";
         "layout" = "dwindle";
       };
 
       decoration = {
-        "rounding" = 10;
-        "active_opacity" = 0.95;
+        "rounding" = 12;
+        "active_opacity" = 1.0;
         "inactive_opacity" = 0.9;
         shadow = {
           enabled = true;
-          "range" = 4;
-          "render_power" = 3;
-          "color" = "rgba(1a1a1aee)";
+          "range" = 30;
+          "render_power" = 5;
+          "offset" = "0 5";
+          "color" = "rgba(00000070)";
         };
         blur = {
           enabled = true;
@@ -233,6 +246,7 @@ in
       misc = {
         "force_default_wallpaper" = -1;
         "disable_hyprland_logo" = true;
+        "disable_splash_rendering" = true;
       };
 
       input = {
@@ -262,15 +276,17 @@ in
       "$mainMod" = "SUPER";
 
       bind = [
-        "$mainMod, T, exec, $terminal"
+        "$mainMod, T, exec, kitty"
         "$mainMod, C, killactive,"
-        "$mainMod, M, exit,"
-        "$mainMod, E, exec, $fileManager"
-        "$mainMod, V, togglefloating,"
-        "$mainMod, R, exec, $menu"
+        "$mainMod, M, exec, uwsm stop"
+        "$mainMod, E, exec, thunar"
+        "$mainMod, F, togglefloating,"
+        "$mainMod, R, exec, dms ipc call spotlight toggle"
         "$mainMod, P, pseudo,"
         "$mainMod, J, togglesplit,"
-        "$mainMod, L, exec, hyprlock"
+        "$mainMod, L, exec, dms ipc call lock lock"
+        "$mainMod, V, exec, dms ipc call clipboard toggle"
+        "$mainMod, N, exec, dms ipc call notifications toggle"
 
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
@@ -305,9 +321,9 @@ in
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        "$mainMod, PRINT, exec, hyprshot -m region"
+        "$mainMod, PRINT, exec, dms screenshot"
         "$mainMod, F11, fullscreen"
-        "ALT, Tab, exec, dms ipc call hypr toggleOverview"
+        "$mainMod, Tab, exec, dms ipc call hypr toggleOverview"
       ];
 
       bindm = [
@@ -316,10 +332,10 @@ in
       ];
 
       bindel = [
-        ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ",XF86AudioRaiseVolume, exec, dms ipc call audio increment 3"
+        ",XF86AudioLowerVolume, exec, dms ipc call audio decrement 3"
+        ",XF86AudioMute, exec, dms ipc call audio mute"
+        ",XF86AudioMicMute, exec, dms ipc call audio micmute"
         ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
         ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
       ];
@@ -334,6 +350,17 @@ in
       xwayland = {
         "force_zero_scaling" = true;
       };
+
+      windowrulev2 = [
+        "opacity 0.9 0.9, floating:0, focus:0"
+        "rounding 12, class:^(org\.gnome\.)"
+        "noborder, class:^(org\.gnome\.)"
+        "noborder, class:^(kitty)$"
+        "float, class:^(gnome-calculator)$"
+        "float, class:^(blueman-manager)$"
+        "float, class:^(org\.gnome\.Nautilus)$"
+        "float, class:^(org.quickshell)$"
+      ];
     };
   };
 
