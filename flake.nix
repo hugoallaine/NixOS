@@ -17,6 +17,10 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nix-monitor = {
+      url = "github:antonjah/nix-monitor";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
     minegrub-world-sel-theme.url = "github:Lxtharia/minegrub-world-sel-theme";
     minesddm = {
@@ -34,6 +38,7 @@
       home-manager,
       hyprland,
       dms,
+      nix-monitor,
       minegrub-theme,
       minegrub-world-sel-theme,
       minesddm,
@@ -75,6 +80,7 @@
                 imports = [
                   ./home.nix
                   dms.homeModules.dankMaterialShell.default
+                  nix-monitor.homeManagerModules.default
                 ];
               };
               home-manager.extraSpecialArgs = {
