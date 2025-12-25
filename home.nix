@@ -248,10 +248,10 @@
       "$mainMod" = "SUPER";
 
       bind = [
-        "$mainMod, T, exec, kitty"
+        "$mainMod, T, exec, uwsm app -- kitty"
         "$mainMod, C, killactive,"
         "$mainMod, M, exec, uwsm stop"
-        "$mainMod, E, exec, thunar"
+        "$mainMod, E, exec, uwsm app -- thunar"
         "$mainMod, F, togglefloating,"
         "$mainMod, R, exec, dms ipc call spotlight toggle"
         "$mainMod, P, pseudo,"
