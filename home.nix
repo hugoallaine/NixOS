@@ -323,15 +323,15 @@
         "force_zero_scaling" = true;
       };
 
-      windowrulev2 = [
-        "opacity 0.9 0.9, floating:0, focus:0"
-        "rounding 12, class:^(org\.gnome\.)"
-        "noborder, class:^(org\.gnome\.)"
-        "noborder, class:^(kitty)$"
-        "float, class:^(gnome-calculator)$"
-        "float, class:^(blueman-manager)$"
-        "float, class:^(org\.gnome\.Nautilus)$"
-        "float, class:^(org.quickshell)$"
+      windowrule = [
+        "match:float 0, match:focus 0, opacity 0.9 0.9"
+        "match:class ^(org\.gnome\.), rounding 12"
+        "match:class ^(org\.gnome\.), border_size 0"
+        "match:class ^(kitty)$, border_size 0"
+        "match:class ^(gnome-calculator)$, float on"
+        "match:class ^(blueman-manager)$, float on"
+        "match:class ^(org\.gnome\.Nautilus)$, float on"
+        "match:class ^(org.quickshell)$, float on"
       ];
     };
   };
