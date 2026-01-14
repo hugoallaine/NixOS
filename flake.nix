@@ -17,6 +17,10 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nix-monitor = {
       url = "github:antonjah/nix-monitor";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -38,6 +42,7 @@
       home-manager,
       hyprland,
       dms,
+      dgop,
       nix-monitor,
       minegrub-theme,
       minegrub-world-sel-theme,
@@ -79,7 +84,7 @@
               home-manager.users.hallaine = { ... }: {
                 imports = [
                   ./home.nix
-                  dms.homeModules.dankMaterialShell.default
+                  dms.homeModules.dank-material-shell
                   nix-monitor.homeManagerModules.default
                 ];
               };
@@ -88,6 +93,7 @@
                   inherit system;
                   config.allowUnfree = true;
                 };
+                inherit dgop;
               };
             }
             minegrub-theme.nixosModules.default

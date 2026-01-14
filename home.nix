@@ -3,6 +3,7 @@
   config,
   pkgs,
   pkgs-unstable,
+  dgop,
   ...
 }:
 
@@ -125,20 +126,20 @@
   # UWSM
   xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
 
-  systemd.user.services.cliphist = {
-    Unit = {
-      Description = "Cliphist clipboard manager";
-      PartOf = [ "graphical-session.target" ];
-      After = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store";
-      Restart = "on-failure";
-    };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-  };
+#   systemd.user.services.cliphist = {
+#     Unit = {
+#       Description = "Cliphist clipboard manager";
+#       PartOf = [ "graphical-session.target" ];
+#       After = [ "graphical-session.target" ];
+#     };
+#     Service = {
+#       ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store";
+#       Restart = "on-failure";
+#     };
+#     Install = {
+#       WantedBy = [ "graphical-session.target" ];
+#     };
+#   };
 
   # Hyprland
   wayland.windowManager.hyprland = {
@@ -338,18 +339,19 @@
   };
 
   # Dank Material Shell
-  programs.dankMaterialShell = {
+  programs.dank-material-shell = {
     enable = true;
     systemd = {
       enable = true;
       restartIfChanged = true;
     };
     enableSystemMonitoring = true;     # System monitoring widgets (dgop)
-    enableClipboard = true;            # Clipboard history manager
+    dgop.package = dgop.packages.${pkgs.system}.default;
     enableVPN = true;                  # VPN management widget
     enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
     enableAudioWavelength = true;      # Audio visualizer (cava)
     enableCalendarEvents = true;       # Calendar integration (khal)
+    enableClipboardPaste = true;       # Pasting items from the clipboard (wtype)
   };
 
   programs.nix-monitor = {
