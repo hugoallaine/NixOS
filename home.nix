@@ -52,6 +52,7 @@
     kubernetes-helm
     pkgs-unstable.msedit
     uv
+    codex
 
     # Desktop
     hyprpolkitagent
