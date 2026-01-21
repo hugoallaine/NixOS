@@ -45,8 +45,13 @@
 
         laptop-nixos-allaine-cc = inputs.nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = commonArgs;
+          specialArgs = commonArgs // {
+            hostName = "laptop-nixos-allaine-cc";
+          };
           modules = [
+            ./modules/bootloader/grub.nix
+            ./modules/networking/common.nix
+            ./hosts/hostName/default.nix
             ./configuration.nix
             inputs.home-manager.nixosModules.home-manager
             {
@@ -64,6 +69,18 @@
             inputs.minegrub-theme.nixosModules.default
             inputs.minegrub-world-sel-theme.nixosModules.default
             inputs.minesddm.nixosModules.default
+          ];
+        };
+
+        laptop-nixos-pro = inputs.nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = commonArgs // {
+            hostName = "laptop-nixos-pro";
+          };
+          modules = [
+            ./modules/bootloader/grub.nix
+            ./modules/networking/common.nix
+            ./hosts/hostName/default.nix
           ];
         };
 

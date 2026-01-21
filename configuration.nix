@@ -8,47 +8,6 @@
 }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
-  # Bootloader
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    device = "nodev";
-    useOSProber = true;
-    extraEntries = ''
-      menuentry "UEFI Firmware Settings" {
-          fwsetup
-      }
-    '';
-    minegrub-theme = {
-      enable = false;
-      splash = "100% Flakes!";
-      background = "background_options/1.8  - [Classic Minecraft].png";
-      boot-options-count = 4;
-    };
-    minegrub-world-sel = {
-      enable = true;
-      customIcons = [
-        {
-          name = "nixos";
-          lineTop = "allaine.cc";
-          lineBottom = "Version: 25.11";
-          imgName = "nixos";
-        }
-      ];
-    };
-  };
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Networking
-  networking.hostName = "laptop-nixos-allaine-cc";
-  networking.networkmanager.enable = true;
-  networking.wg-quick.interfaces.NAS.configFile = "/home/hallaine/vpn/nas.conf";
-  networking.extraHosts = "192.168.1.202 prod.nasdak.fr";
-
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
