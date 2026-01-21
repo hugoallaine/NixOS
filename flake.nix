@@ -51,7 +51,7 @@
           modules = [
             ./modules/bootloader/grub.nix
             ./modules/networking/common.nix
-            ./hosts/hostName/default.nix
+            ./hosts/laptop-nixos-allaine-cc/default.nix
             ./configuration.nix
             inputs.home-manager.nixosModules.home-manager
             {
@@ -80,7 +80,7 @@
           modules = [
             ./modules/bootloader/grub.nix
             ./modules/networking/common.nix
-            ./hosts/hostName/default.nix
+            ./hosts/laptop-nixos-pro/default.nix
           ];
         };
 
