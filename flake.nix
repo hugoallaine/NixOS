@@ -51,8 +51,20 @@
           modules = [
             ./modules/bootloader/grub.nix
             ./modules/networking/common.nix
+            ./modules/power/common.nix
+            ./modules/locale/common.nix
+            ./modules/users/common.nix
+            ./modules/nix/common.nix
+            ./modules/fonts/common.nix
+            ./modules/packages/common.nix
+            ./modules/window_manager/hyprland/nixos.nix
+            ./modules/display_manager/sddm.nix
+            ./modules/security/gnome-keyring.nix
+            ./modules/security/polkit.nix
+            ./modules/security/sudo.nix
+            ./modules/games/steam.nix
+            ./modules/virtualisation/docker.nix
             ./hosts/laptop-nixos-allaine-cc/default.nix
-            ./configuration.nix
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -80,6 +92,12 @@
           modules = [
             ./modules/bootloader/grub.nix
             ./modules/networking/common.nix
+            ./modules/power/common.nix
+            ./modules/locale/common.nix
+            ./modules/users/common.nix
+            ./modules/nix/common.nix
+            ./modules/fonts/common.nix
+            ./modules/packages/common.nix
             ./hosts/laptop-nixos-pro/default.nix
           ];
         };
