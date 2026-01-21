@@ -1,13 +1,9 @@
 {
-  description = "Hugo Allainé | Laptop NixOS Configuration";
+  description = "Hugo Allainé | NixOS Configurations";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # lanzaboote = {
-    #   url = "github:nix-community/lanzaboote/v0.4.2";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,74 +29,44 @@
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      nixpkgs-unstable,
-      # lanzaboote,
-      home-manager,
-      hyprland,
-      dms,
-      dgop,
-      nix-monitor,
-      minegrub-theme,
-      minegrub-world-sel-theme,
-      minesddm,
-      ...
-    }:
+  outputs = inputs:
+    let
+      system = "x86_64-linux";
+      commonArgs = {
+        inherit (inputs) hyprland dgop;
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      };
+    in
     {
       nixosConfigurations = {
 
-        laptop-nixos-allaine-cc = nixpkgs.lib.nixosSystem rec {
-          system = "x86_64-linux";
-
-          specialArgs = {
-            inherit hyprland;
-            pkgs-unstable = import nixpkgs-unstable {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          };
-
+        laptop-nixos-allaine-cc = inputs.nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = commonArgs;
           modules = [
             ./configuration.nix
-            # lanzaboote.nixosModules.lanzaboote
-            # ({ pkgs, lib, ... }: {
-
-            #   environment.systemPackages = [
-            #     pkgs.sbctl
-            #   ];
-            #   boot.loader.systemd-boot.enable = lib.mkForce false;
-            #   boot.lanzaboote = {
-            #     enable = true;
-            #     pkiBundle = "/var/lib/sbctl";
-            #   };
-            # })
-            home-manager.nixosModules.home-manager
+            inputs.home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.hallaine = { ... }: {
                 imports = [
                   ./home.nix
-                  dms.homeModules.dank-material-shell
-                  nix-monitor.homeManagerModules.default
+                  inputs.dms.homeModules.dank-material-shell
+                  inputs.nix-monitor.homeManagerModules.default
                 ];
               };
-              home-manager.extraSpecialArgs = {
-                pkgs-unstable = import nixpkgs-unstable {
-                  inherit system;
-                  config.allowUnfree = true;
-                };
-                inherit dgop;
-              };
+              home-manager.extraSpecialArgs = commonArgs;
             }
-            minegrub-theme.nixosModules.default
-            minegrub-world-sel-theme.nixosModules.default
-            minesddm.nixosModules.default
+            inputs.minegrub-theme.nixosModules.default
+            inputs.minegrub-world-sel-theme.nixosModules.default
+            inputs.minesddm.nixosModules.default
           ];
         };
+
       };
     };
 }
