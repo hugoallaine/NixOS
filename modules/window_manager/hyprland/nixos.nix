@@ -1,4 +1,4 @@
-{ hyprland, ... }:
+{ pkgs, hyprland, ... }:
 {
   # Cachix
   nix.settings = {
