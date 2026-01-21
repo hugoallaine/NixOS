@@ -152,7 +152,7 @@
 
       general = {
         "gaps_in" = 5;
-        "gaps_out" = 5;
+        "gaps_out" = 10;
         "border_size" = 0;
         "col.active_border" = "rgba(707070ff)";
         "col.inactive_border" = "rgba(d0d0d0ff)";
@@ -179,7 +179,7 @@
       };
 
       animations = {
-        enabled = "yes";
+        enabled = "no";
         bezier = [
           "easeOutQuint,0.23,1,0.32,1"
           "easeInOutCubic,0.65,0.05,0.36,1"
