@@ -49,29 +49,14 @@
             hostName = "laptop-nixos-allaine-cc";
           };
           modules = [
-            ./modules/bootloader/grub.nix
-            ./modules/networking/common.nix
-            ./modules/power/common.nix
-            ./modules/locale/common.nix
-            ./modules/users/common.nix
-            ./modules/nix/common.nix
-            ./modules/fonts/common.nix
-            ./modules/packages/common.nix
-            ./modules/window_manager/hyprland/nixos.nix
-            ./modules/display_manager/sddm.nix
-            ./modules/security/gnome-keyring.nix
-            ./modules/security/polkit.nix
-            ./modules/security/sudo.nix
-            ./modules/games/steam.nix
-            ./modules/virtualisation/docker.nix
-            ./hosts/laptop-nixos-allaine-cc/default.nix
+            ./hosts/laptop-nixos-allaine-cc/nixos/default.nix
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.hallaine = { ... }: {
                 imports = [
-                  ./home.nix
+                  ./hosts/laptop-nixos-allaine-cc/home/default.nix
                   inputs.dms.homeModules.dank-material-shell
                   inputs.nix-monitor.homeManagerModules.default
                 ];
