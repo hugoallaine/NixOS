@@ -9,11 +9,11 @@
     ../../../modules/home/config/desktop/dms.nix
     ../../../modules/home/config/shell/bash.nix
     ../../../modules/home/config/shell/kitty.nix
-    ../../../modules/home/config/packages/cli.nix
-    ../../../modules/home/config/packages/desktop.nix
-    ../../../modules/home/config/packages/games.nix
-    ../../../modules/home/config/packages/mediaplayer.nix
-    ../../../modules/home/config/packages/security.nix
+    ../../../modules/home/packages/cli.nix
+    ../../../modules/home/packages/desktop.nix
+    ../../../modules/home/packages/games.nix
+    ../../../modules/home/packages/mediaplayer.nix
+    ../../../modules/home/packages/security.nix
     ../../../modules/home/config/theme/gtk.nix
     ../../../modules/home/config/theme/qt.nix
     ../../../modules/home/config/git.nix
