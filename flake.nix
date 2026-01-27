@@ -75,15 +75,20 @@
             hostName = "laptop-nixos-pro";
           };
           modules = [
-            ./modules/bootloader/grub.nix
-            ./modules/networking/common.nix
-            ./modules/power/common.nix
-            ./modules/locale/common.nix
-            ./modules/users/common.nix
-            ./modules/nix/common.nix
-            ./modules/fonts/common.nix
-            ./modules/packages/common.nix
-            ./hosts/laptop-nixos-pro/default.nix
+            ./hosts/laptop-nixos-pro/nixos/default.nix
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.hallaine = { ... }: {
+                imports = [
+                  ./hosts/laptop-nixos-pro/home/default.nix
+                ];
+              };
+              home-manager.extraSpecialArgs = commonArgs;
+            }
+            inputs.minegrub-theme.nixosModules.default
+            inputs.minegrub-world-sel-theme.nixosModules.default
           ];
         };
 
