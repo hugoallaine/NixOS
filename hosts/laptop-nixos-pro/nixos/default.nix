@@ -10,8 +10,8 @@
     ../../../modules/nixos/nix/common.nix
     ../../../modules/nixos/fonts/common.nix
     ../../../modules/nixos/packages/common.nix
-    ../../../modules/nixos/window_manager/gnome.nix
-    ../../../modules/nixos/display_manager/gdm.nix
+    ../../../modules/nixos/window_manager/plasma6.nix
+    ../../../modules/nixos/display_manager/sddm.nix
     ../../../modules/nixos/security/gnome-keyring.nix
     ../../../modules/nixos/security/polkit.nix
     ../../../modules/nixos/security/sudo.nix
