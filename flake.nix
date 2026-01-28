@@ -89,6 +89,7 @@
             }
             inputs.minegrub-theme.nixosModules.default
             inputs.minegrub-world-sel-theme.nixosModules.default
+            inputs.minesddm.nixosModules.default
           ];
         };
 
