@@ -122,7 +122,7 @@
         "type": "github"
       }
     },
-    "grub-secureboot": {
+    "fuerteboote": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -132,14 +132,14 @@
         "lastModified": 1794259695,
         "narHash": "sha256-zLlUcO+NF91ecF4PyJl4+mcV2fXGc6AcRTCFKGpxBds=",
         "owner": "hugoallaine",
-        "repo": "nixos-secure-boot",
+        "repo": "fuerteboote",
         "rev": "59580fd5655d8929bf2bde23bae3ed4ad96b4574",
         "type": "github"
       },
       "original": {
         "owner": "hugoallaine",
         "ref": "v0.1.0",
-        "repo": "nixos-secure-boot",
+        "repo": "fuerteboote",
         "type": "github"
       }
     },
@@ -658,7 +658,7 @@
     "root": {
       "inputs": {
         "dms": "dms",
-        "grub-secureboot": "grub-secureboot",
+        "fuerteboote": "fuerteboote",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "minegrub-theme": "minegrub-theme",
