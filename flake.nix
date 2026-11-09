@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     grub-secureboot = {
-      url = "github:hugoallaine/nixos-secure-boot";
+      url = "github:hugoallaine/nixos-secure-boot/v0.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";

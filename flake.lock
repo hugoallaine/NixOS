@@ -129,15 +129,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1794177079,
-        "narHash": "sha256-GFUC+qv0T3S+tLZRK1U/p8JDMnhrzQR74P+thL9rhCg=",
+        "lastModified": 1794259695,
+        "narHash": "sha256-zLlUcO+NF91ecF4PyJl4+mcV2fXGc6AcRTCFKGpxBds=",
         "owner": "hugoallaine",
         "repo": "nixos-secure-boot",
-        "rev": "1df9d1a549661d348acbb8015fb0571b8dc0d024",
+        "rev": "59580fd5655d8929bf2bde23bae3ed4ad96b4574",
         "type": "github"
       },
       "original": {
         "owner": "hugoallaine",
+        "ref": "v0.1.0",
         "repo": "nixos-secure-boot",
         "type": "github"
       }
