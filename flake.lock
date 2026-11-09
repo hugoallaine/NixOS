@@ -122,6 +122,26 @@
         "type": "github"
       }
     },
+    "grub-secureboot": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794177079,
+        "narHash": "sha256-GFUC+qv0T3S+tLZRK1U/p8JDMnhrzQR74P+thL9rhCg=",
+        "owner": "hugoallaine",
+        "repo": "nixos-secure-boot",
+        "rev": "1df9d1a549661d348acbb8015fb0571b8dc0d024",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hugoallaine",
+        "repo": "nixos-secure-boot",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -637,6 +657,7 @@
     "root": {
       "inputs": {
         "dms": "dms",
+        "grub-secureboot": "grub-secureboot",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "minegrub-theme": "minegrub-theme",

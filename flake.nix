@@ -17,6 +17,10 @@
       url = "github:antonjah/nix-monitor";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    grub-secureboot = {
+      url = "github:hugoallaine/nixos-secure-boot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
     minegrub-world-sel-theme.url = "github:Lxtharia/minegrub-world-sel-theme";
     minesddm = {
@@ -59,6 +63,7 @@
               };
               home-manager.extraSpecialArgs = commonArgs;
             }
+            inputs.grub-secureboot.nixosModules.default
             inputs.minegrub-theme.nixosModules.default
             inputs.minegrub-world-sel-theme.nixosModules.default
             inputs.minesddm.nixosModules.default
@@ -83,6 +88,7 @@
               };
               home-manager.extraSpecialArgs = commonArgs;
             }
+            inputs.grub-secureboot.nixosModules.default
             inputs.minegrub-theme.nixosModules.default
             inputs.minegrub-world-sel-theme.nixosModules.default
             inputs.minesddm.nixosModules.default
