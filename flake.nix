@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     fuerteboote = {
-      url = "github:hugoallaine/fuerteboote/v0.1.0";
+      url = "github:hugoallaine/fuerteboote/v0.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";

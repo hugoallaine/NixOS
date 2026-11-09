@@ -129,16 +129,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1794259695,
-        "narHash": "sha256-zLlUcO+NF91ecF4PyJl4+mcV2fXGc6AcRTCFKGpxBds=",
+        "lastModified": 1794265318,
+        "narHash": "sha256-iv5oGvzE4XY54lT+gNaCQ1YITYzLUAZDQMd2DFILqfc=",
         "owner": "hugoallaine",
         "repo": "fuerteboote",
-        "rev": "59580fd5655d8929bf2bde23bae3ed4ad96b4574",
+        "rev": "979140ba3ae060fc83d0f58dcf56716ec4e42a87",
         "type": "github"
       },
       "original": {
         "owner": "hugoallaine",
-        "ref": "v0.1.0",
+        "ref": "v0.2.0",
         "repo": "fuerteboote",
         "type": "github"
       }

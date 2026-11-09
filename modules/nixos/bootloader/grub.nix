@@ -1,6 +1,6 @@
 { pkgs-unstable, ... }:
 {
-  # grub-secureboot needs GRUB >= 2.14 (--disable-cli); NixOS 26.05 ships 2.12.
+  # fuerteboote needs GRUB >= 2.14 (--disable-cli); NixOS 26.05 ships 2.12.
   # shortcut: drop this overlay once on NixOS 26.11.
   nixpkgs.overlays = [ (_: _: { grub2 = pkgs-unstable.grub2; }) ];
 
