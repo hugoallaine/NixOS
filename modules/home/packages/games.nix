@@ -4,7 +4,7 @@
   [
     # Games
     solitaire-tui
-    melonDS
+    melonds
     prismlauncher
   ];
 }

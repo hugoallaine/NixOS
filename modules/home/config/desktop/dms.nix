@@ -1,4 +1,4 @@
-{ pkgs, dgop, ... }:
+{ pkgs, ... }:
 {
   programs.dank-material-shell = {
     enable = true;
@@ -8,7 +8,6 @@
     };
 
     enableSystemMonitoring = true;     # System monitoring widgets (dgop)
-    dgop.package = dgop.packages.${pkgs.system}.default;
     enableVPN = true;                  # VPN management widget
     enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
     enableAudioWavelength = true;      # Audio visualizer (cava)

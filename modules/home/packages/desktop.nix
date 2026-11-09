@@ -6,10 +6,10 @@
     hyprpolkitagent
 
     # Web browser
-    brave
+    firefox
 
     # File manager
-    xfce.thunar
+    thunar
 
     # Wallpaper Engine
     linux-wallpaperengine

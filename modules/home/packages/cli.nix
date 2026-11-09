@@ -3,7 +3,7 @@
   home.packages = with pkgs;
   [
     # Nix FMT
-    nixfmt-rfc-style
+    nixfmt
 
     # Task Manager
     btop
@@ -22,7 +22,7 @@
     kubernetes-helm
 
     # File editor
-    pkgs-unstable.msedit
+    msedit
 
     # Python environment manager
     uv

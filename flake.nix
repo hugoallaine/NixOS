@@ -2,19 +2,15 @@
   description = "Hugo Allainé | NixOS Configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    dgop = {
-      url = "github:AvengeMedia/dgop";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nix-monitor = {
@@ -33,7 +29,7 @@
     let
       system = "x86_64-linux";
       commonArgs = {
-        inherit (inputs) hyprland dgop;
+        inherit (inputs) hyprland;
         pkgs-unstable = import inputs.nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
