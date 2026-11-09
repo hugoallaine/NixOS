@@ -115,7 +115,7 @@
         "$mainMod, F, togglefloating,"
         "$mainMod, R, exec, dms ipc call spotlight toggle"
         "$mainMod, P, pseudo,"
-        "$mainMod, J, togglesplit,"
+        "$mainMod, J, layoutmsg, togglesplit"
         "$mainMod, L, exec, dms ipc call lock lock"
         "$mainMod, V, exec, dms ipc call clipboard toggle"
         "$mainMod, N, exec, dms ipc call notifications toggle"
